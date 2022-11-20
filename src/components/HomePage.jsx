@@ -1,25 +1,10 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { FundContext } from "./context";
 
-const HomePage = () => {
-  const [funds, setFunds] = useState([]);
-
+export const HomePage = () => {
+  const { setSearchText } = useContext(FundContext);
   useEffect(() => {
-    axios
-      .get(`https://api.mfapi.in/mf`)
-      .then((res) => {
-        console.log(res);
-        setFunds(res.data);
-      })
-      .catch((err) => console.log(err));
+    setSearchText("Tata");
   }, []);
-
-  const fundList = funds.map((e) => <li keys={e.id}>{e.schemeName}</li>);
-  return (
-    <div>
-      <ol>{fundList}</ol>
-    </div>
-  );
+  return;
 };
-
-export default HomePage;
